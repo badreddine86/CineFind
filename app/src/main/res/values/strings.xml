@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">CineFind</string>.
+    <string name="movies_list">Movies List</string>
+    <string name="parameters">Parameters</string>
+</resources>
