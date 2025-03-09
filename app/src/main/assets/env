@@ -1,2 +1,3 @@
 BASE_URL=https://api.themoviedb.org/3/
+IMAGE_BASE_URL=https://image.tmdb.org/t/p/original
 API_KEY=2bec594d218127f41339409aad13fe03

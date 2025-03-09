@@ -2,4 +2,6 @@
     <string name="app_name">CineFind</string>.
     <string name="movies_list">Movies List</string>
     <string name="parameters">Parameters</string>
+    <string name="no_movies">No movies found.</string>
+    <string name="err_movies_list">Error loading movies list.</string>
 </resources>
