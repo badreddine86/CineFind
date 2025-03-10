@@ -20,14 +20,9 @@ class MoviesViewModel @Inject constructor(
     private val _movies = MutableStateFlow<Response<MovieResponse>>(Response.Loading)
     val movies: StateFlow<Response<MovieResponse>> = _movies
 
-    init {
-        // Optionally, load movies when ViewModel is initialized
-        // getMovies(1)
-    }
-
     fun getMovies(page: Int) {
         viewModelScope.launch {
-            // Fetch movies and map to Response<MovieResponse>
+
             getMoviesListUseCase.invoke(page).collect { response ->
                 _movies.value = response
             }

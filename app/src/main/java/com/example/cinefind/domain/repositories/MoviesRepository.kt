@@ -10,5 +10,4 @@ interface MoviesRepository {
 
     suspend fun getMovies(page: Int): Flow<Response<MovieResponse>>
 
-    suspend fun getMovieDetails(): Movie
 }

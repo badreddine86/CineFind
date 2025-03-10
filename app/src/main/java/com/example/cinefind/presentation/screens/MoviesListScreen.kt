@@ -96,7 +96,7 @@ fun MovieListScreen(viewModel: MoviesViewModel = hiltViewModel()) {
                         .safeDrawingPadding(),
                     contentAlignment = Alignment.Center
                 ) {
-                    CircularProgressCustom() // Show only the loader
+                    CircularProgressCustom()
                 }
             }
 

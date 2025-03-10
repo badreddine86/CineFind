@@ -1,9 +1,7 @@
 package com.example.cinefind.presentation.composables
 
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -42,7 +40,7 @@ fun MovieItem(movie: Movie) {
     Card(
         modifier = Modifier
             .padding(8.dp)
-            .fillMaxWidth(), // Makes the card take full width
+            .fillMaxWidth(),
         shape = RoundedCornerShape(8.dp),
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
     ) {
@@ -55,8 +53,8 @@ fun MovieItem(movie: Movie) {
                 contentDescription = movie.title,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(250.dp), // Fixed height to maintain poster-like appearance
-                contentScale = ContentScale.Crop // Crops the image to fill the space
+                    .height(250.dp),
+                contentScale = ContentScale.Crop
             )
 
             // Movie Details
@@ -65,48 +63,45 @@ fun MovieItem(movie: Movie) {
                     .fillMaxWidth()
                     .padding(16.dp)
             ) {
-                // Movie Title - Bold & Larger
+
                 Text(
                     text = movie.title,
-                    style = MaterialTheme.typography.headlineSmall, // Larger for emphasis
-                    fontWeight = FontWeight.Black, // Strong presence
-                    fontSize = 20.sp, // Slightly larger
-                    color = Color.White // Cinema-like dark mode
+                    style = MaterialTheme.typography.headlineSmall,
+                    fontWeight = FontWeight.Black,
+                    fontSize = 20.sp,
+                    color = Color.White
                 )
 
                 Spacer(modifier = Modifier.height(6.dp))
 
-                // Movie Synopsis - Subtle and readable
                 Text(
                     text = movie.synopsis,
                     style = MaterialTheme.typography.bodyMedium,
-                    fontSize = 14.sp, // Readable but secondary
-                    fontWeight = FontWeight.Light, // Soft for readability
-                    color = Color.Gray, // Less dominant than title
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight.Light,
+                    color = Color.Gray,
                     maxLines = 3,
                     overflow = TextOverflow.Ellipsis
                 )
 
                 Spacer(modifier = Modifier.height(6.dp))
 
-                // Release Date - Smaller, subtle, secondary info
                 Text(
                     text = "Release: ${movie.date}",
                     style = MaterialTheme.typography.labelLarge,
                     fontSize = 12.sp,
                     fontWeight = FontWeight.Medium,
-                    color = Color(0xFFFFC107) // Gold accent for style
+                    color = Color(0xFFFFC107)
                 )
 
                 Spacer(modifier = Modifier.height(4.dp))
 
-                // Rating - Highlighted
                 Text(
-                    text = "⭐ ${movie.note}/10",
+                    text = "⭐ %.1f/10".format(movie.note ?: 0.0),
                     style = MaterialTheme.typography.titleMedium,
-                    fontSize = 16.sp, // Noticeable
-                    fontWeight = FontWeight.Bold, // More emphasis
-                    color = getRatingColor(movie.note ?: 0.0) // Red like Rotten Tomatoes style
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = getRatingColor(movie.note ?: 0.0)
                 )
             }
         }

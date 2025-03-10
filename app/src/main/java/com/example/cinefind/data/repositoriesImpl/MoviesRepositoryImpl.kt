@@ -16,37 +16,38 @@ import javax.inject.Inject
 class MoviesRepositoryImpl @Inject constructor(private val apiService: ApiService)  : MoviesRepository {
 
     override suspend fun getMovies(page: Int): Flow<Response<MovieResponse>> = callbackFlow {
+        try {
+            val call = apiService.getPopularMovies(page = page)
 
-        val call = apiService.getPopularMovies(page = page)
-
-        val callback = object : Callback<MovieResponse> {
-            override fun onResponse(call: Call<MovieResponse>, response: RetrofitResponse<MovieResponse>) {
-                if (response.isSuccessful) {
-                    response.body()?.let { movieResponse ->
-                        trySend(Response.Success(movieResponse))
-                    } ?: run {
-                        trySend(Response.Error("Empty response body"))
+            val callback = object : Callback<MovieResponse> {
+                override fun onResponse(call: Call<MovieResponse>, response: RetrofitResponse<MovieResponse>) {
+                    if (response.isSuccessful) {
+                        response.body()?.let { movieResponse ->
+                            trySend(Response.Success(movieResponse)).isSuccess
+                        } ?: run {
+                            trySend(Response.Error("Empty response body")).isSuccess
+                        }
+                    } else {
+                        trySend(Response.Error("Error: ${response.code()}")).isSuccess
                     }
-                } else {
-                    trySend(Response.Error("Error: ${response.code()}"))
+                    close()
                 }
-                close()
+
+                override fun onFailure(call: Call<MovieResponse>, t: Throwable) {
+                    trySend(Response.Error("Failure: ${t.localizedMessage}")).isSuccess
+                    close()
+                }
             }
 
-            override fun onFailure(call: Call<MovieResponse>, t: Throwable) {
-                trySend(Response.Error("Failure: ${t.localizedMessage}"))
-                close()
-            }
+            call.enqueue(callback)
+
+            awaitClose { call.cancel() }
+
+        } catch (e: Exception) {
+            trySend(Response.Error("Exception: ${e.localizedMessage}")).isSuccess
+            close(e)
         }
-        call.enqueue(callback)
-
-        awaitClose { call.cancel() }
     }
 
 
-
-
-    override suspend fun getMovieDetails(): Movie {
-        TODO("Not yet implemented")
-    }
 }
