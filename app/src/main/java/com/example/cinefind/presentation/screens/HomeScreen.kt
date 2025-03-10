@@ -98,7 +98,7 @@ fun HomeScreen() {
                             contentDescription = "cinema Logo",
                             contentScale = ContentScale.Crop,
                         )
-                        Text(
+                        /*Text(
                             text = stringResource(id = R.string.app_name),
                             style = MaterialTheme.typography.bodyLarge,
                             color = MaterialTheme.colorScheme.onPrimary,
@@ -106,7 +106,7 @@ fun HomeScreen() {
                                 .wrapContentSize()
                                 .align(Alignment.BottomCenter)
                                 .padding(bottom = 16.dp)
-                        )
+                        )*/
                     }
 
                     Spacer(Modifier.height(12.dp))
