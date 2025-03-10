@@ -4,4 +4,6 @@
     <string name="parameters">Parameters</string>
     <string name="no_movies">No movies found.</string>
     <string name="err_movies_list">Error loading movies list.</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
 </resources>

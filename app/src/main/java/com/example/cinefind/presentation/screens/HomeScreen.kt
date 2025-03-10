@@ -68,9 +68,6 @@ fun HomeScreen() {
     val versionName = BuildConfig.VERSION_NAME
     val scope = rememberCoroutineScope()
     var currentScreen by remember { mutableStateOf(drawerItems[0]) }
-    val hostState = remember {
-        SnackbarHostState()
-    }
 
     Box(
         modifier = Modifier
@@ -150,7 +147,7 @@ fun HomeScreen() {
                                 title = {
                                     Text(
                                         currentScreen.title,
-                                        style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Normal)
+                                        style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Normal)
                                     )
                                 },
                                 navigationIcon = {
